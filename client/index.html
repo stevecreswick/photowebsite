@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="PhotoPage">
+  <head>
+    <meta charset="utf-8">
+    <title>Photo Page</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-cookies.js"></script>
+  </head>
+  <body>
+
+    <section ng-controller="PhotosController">
+
+      <form ng-submit="createPhoto()">
+           <div class="row">
+               <div class="input-field col s4">
+                 <label for="resource-title">Title</label>
+                 <input type="text" ng-model="newPhoto.title" placeholder="...title" id="resource-title">
+               </div>
+               <div class="input-field col s8">
+                 <label for="resource-desc">location</label>
+                 <input type="text" ng-model="newPhoto.location" placeholder="...description" id="resource-desc">
+               </div>
+           </div>
+           <div class="row">
+             <div class="input-field col s6">
+               <label for="resource-link">Link</label>
+               <input type="text" ng-model="newPhoto.link" placeholder="...link" id="resource-link">
+             </div>
+             <div class="input-field col s2">
+               <button type="submit" value="Submit">Submit</button>
+             </div>
+           </div>
+           </form>
+
+           <ul>
+            <li ng-repeat="photo in photos">
+              <div class="photo">
+                <h5>{{ photo.title }} </h5>
+                <div class="photo-link">
+                  {{photo.url}}
+                </div>
+                <p class="photo-location">
+                  {{photo.location}}
+                </p>
+                <a class="waves-effect waves-light btn red accent-2 right" ng-click="removePhoto(photo)">Remove</a>
+
+              </div>
+            </li>
+          </ul>
+    </section>
+
+
+
+
+    <script src="/js/app.js" charset="utf-8"></script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="PhotoPage">
+  <head>
+    <meta charset="utf-8">
+    <title>Photo Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-cookies.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js" charset="utf-8"></script>
+
+  </head>
+  <body>
+    <div class="container" ng-controller="AdminController">
+
+    <div class="row">
+      <div class="twelve columns">
+        <h1 class="page-header">Macaloin</h1>
+      </div>
+    </div>
+
+    <section ng-controller="BlogsController">
+           <div class="row">
+             <div class="twelve columns text-center" ng-repeat="blog in blogs">
+               <form ng-submit="updateBlog($index)">
+                <input ng-model="blog.title" type="text">
+                <input ng-model="blog.message" type="text">
+                <input ng-model="blog.tags" type="text">
+                <input type="submit">
+              </form>
+           </div>
+         </div>
+    </section>
+
+
+  </div>
+
+
+
+    <script src="/js/app.js" charset="utf-8"></script>
+  </body>
+</html>

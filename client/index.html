@@ -9,53 +9,53 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-cookies.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js" charset="utf-8"></script>
   </head>
   <body>
 
-    <section ng-controller="PhotosController">
+    <div class="container" ng-controller="AdminController">
 
-      <form ng-submit="createPhoto()">
-        <div class="container">
-           <div class="row">
-               <div class="six columns">
-                 <label for="resource-title">Title</label>
-                 <input type="text" ng-model="newPhoto.title" placeholder="...title" id="resource-title">
-               </div>
-               <div class="six columns">
-                 <label for="resource-desc">location</label>
-                 <input type="text" ng-model="newPhoto.location" placeholder="...description" id="resource-desc">
-               </div>
-           </div>
-           <div class="row">
-             <div class="six columns">
-               <label for="resource-link">Link</label>
-               <input type="text" ng-model="newPhoto.url" placeholder="...link" id="resource-link">
-             </div>
-             <div class="six columns">
-               <button type="submit" value="Submit">Submit</button>
-             </div>
-           </div>
-           </form>
+    <div class="row">
+      <div class="twelve columns">
+        <h1 class="page-header">Macaloin</h1>
+      </div>
+    </div>
 
-           <ul>
-            <li ng-repeat="photo in photos">
-              <div class="photo">
-                <h5>{{ photo.title }} </h5>
-                <div class="photo-link">
-                  <img src="{{photo.url}}"/>
-                </div>
-                <p class="photo-location">
-                  {{photo.location}}
-                </p>
-                <a class="waves-effect waves-light btn red accent-2 right" ng-click="removePhoto(photo)">Remove</a>
+      <ul class="admin-links text-center">
+        <li class="photos" ng-click="toggleSection($event)" id="photos">Photos</li>
+        <li class="updates" ng-click="toggleSection($event)" id="blogs">Updates</li>
+      </ul>
 
+    <section ng-controller="PhotosController" ng-if="$root.page == 'photos'">
+      <div class="row">
+        <div class="twelve columns text-center">
+          <div ng-repeat="photo in photos">
+            <div class="photo-container">
+              <div class="photo-link">
+                <img src="{{photo.url}}" />
               </div>
-            </li>
-          </ul>
-
+              <a class="waves-effect waves-light btn red accent-2 right" ng-click="removePhoto(photo)">Remove</a>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
+    <section ng-controller="BlogsController" ng-if="$root.page == 'blogs'">
+           <div class="row">
+             <div class="twelve columns text-center">
+               <div class="post" ng-repeat="blog in blogs">
+                 <div class="post-title">{{blog.title}}</div>
+                 <div class="post-body">{{blog.message}}</div>
+                 <div class="post-tags">{{blog.tags}}</div>
+                 <div class="post-date">{{blog.date}}</div>
+               </div>
+         </div>
+       </div>
+    </section>
+
+
+  </div>
 
 
 

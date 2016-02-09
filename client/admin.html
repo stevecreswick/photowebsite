@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html ng-app="PhotoPage">
+  <head>
+    <meta charset="utf-8">
+    <title>Photo Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-cookies.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js" charset="utf-8"></script>
+
+  </head>
+  <body>
+    <div class="container" ng-controller="AdminController">
+
+    <div class="row">
+      <div class="twelve columns">
+        <h1 class="page-header">Macaloin</h1>
+      </div>
+    </div>
+
+      <ul class="admin-links text-center">
+        <li class="photos" ng-click="toggleSection($event)" id="photos">Photos</li>
+        <li class="updates" ng-click="toggleSection($event)" id="blogs">Updates</li>
+        <li class="updates">Settings</li>
+      </ul>
+
+    <section ng-controller="PhotosController" ng-if="$root.page == 'photos'">
+      <form ng-submit="createPhoto()">
+           <div class="row text-center">
+               <div class="twelve columns">
+                 <h4>Add a Photo</h4>
+                 <label for="resource-title">Title</label>
+                 <input type="text" ng-model="newPhoto.title" placeholder="...title" id="resource-title">
+               </div>
+             </div>
+               <div class="row text-center">
+               <div class="twelve columns">
+                 <label for="resource-desc">location</label>
+                 <input type="text" ng-model="newPhoto.location" placeholder="...description" id="resource-desc">
+               </div>
+             </div>
+           <div class="row text-center">
+             <div class="twelve columns">
+               <label for="resource-link">Link</label>
+               <input type="text" ng-model="newPhoto.url" placeholder="...link" id="resource-link">
+             </div>
+           </div>
+             <div class="row text-center">
+             <div class="twelve columns">
+               <button type="submit" value="Submit">Submit</button>
+             </div>
+           </div>
+           </form>
+
+           <div class="row">
+             <div class="twelve columns text-center">
+           <table class="u-full-width">
+             <thead>
+               <tr>
+                 <th>Order</th>
+                 <th>Image</th>
+                 <th>Title</th>
+                 <th>Location</th>
+                 <th>Remove</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr ng-repeat="photo in photos">
+                 <td>{{photo.title}}</td>
+                 <td><div class="admin-photo"><img src="{{photo.url}}"/></div></td>
+                 <td>{{photo.title}}</td>
+                 <td>{{photo.location}}</td>
+                 <td><a ng-click="removePhoto(photo)">Remove</a></td>
+               </tr>
+             </tbody>
+           </table>
+         </div>
+       </div>
+
+    </section>
+
+    <section ng-controller="BlogsController" ng-if="$root.page == 'blogs'">
+      <form ng-submit="createBlog()">
+         <div class="row text-center">
+             <div class="six columns">
+              <div class="row text-center">
+               <div class="twelve columns">
+                 <h4>Add a Blog Post</h4>
+                 <label for="resource-title">Title</label>
+                 <input type="text" ng-model="newBlog.title" placeholder="...title" id="blog-title">
+               </div>
+             </div>
+               <div class="row text-center">
+               <div class="twelve columns">
+                 <label for="resource-desc">message</label>
+                 <textarea type="text" ng-model="newBlog.message" placeholder="...description" id="blog-message"></textarea>
+               </div>
+             </div>
+           <div class="row text-center">
+             <div class="twelve columns">
+               <label for="resource-link">Tags</label>
+               <input type="text" ng-model="newBlog.tags" placeholder="...tags" id="blog-tags">
+             </div>
+           </div>
+             <div class="row text-center">
+             <div class="twelve columns">
+               <button type="submit" value="Submit">Submit</button>
+             </div>
+           </div>
+           </form>
+         </div>
+       </div>
+
+           <div class="row">
+             <div class="twelve columns text-center">
+           <table class="u-full-width">
+             <thead>
+               <tr>
+                 <th>Title</th>
+                 <th>Message</th>
+                 <th>Tags</th>
+                 <th>Remove</th>
+                 <th>Edit</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr ng-repeat="blog in blogs">
+                 <td>{{blog.title}}</td>
+                 <td>{{blog.message}}</td>
+                 <td>{{blog.tags}}</td>
+                 <td><a ng-click="removeBlog(blog)">Remove</a></td>
+                 <td><a href="/api/blogs/edit/{{blog._id}}">Edit</a></td>
+               </tr>
+             </tbody>
+           </table>
+         </div>
+       </div>
+    </section>
+
+
+  </div>
+
+
+
+    <script src="/js/app.js" charset="utf-8"></script>
+  </body>
+</html>

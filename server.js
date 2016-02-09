@@ -2,7 +2,8 @@
 var express     =       require('express'),
     bodyParser  =       require('body-parser'),
     mongoose    =       require('mongoose'),
-    morgan      =       require('morgan');
+    morgan      =       require('morgan'),
+    uuid        =       require('node-uuid');
 
 
 
@@ -20,11 +21,16 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/client/index.html');
 });
 
-var PhotosController = require('./server/controllers/photos')
+var PhotosController = require('./server/controllers/photos');
 app.use('/api/photos', PhotosController);
 
-// var UsersController = require('./server/controllers/users');
-// app.use('/api/users', UsersController);
+var BlogsController = require('./server/controllers/blogs');
+app.use('/api/blogs', BlogsController);
+
+
+app.get('/admin', function(req, res){
+res.sendFile(__dirname + '/client/admin.html');
+});
 
 var port = process.env.PORT || '8080';
 

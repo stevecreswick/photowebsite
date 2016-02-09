@@ -10,3 +10,6 @@ var PhotoSchema = new mongoose.Schema({
 var Photo = mongoose.model('Photo', PhotoSchema);
 
 module.exports = Photo;
+
+
+// Add month, year, order, category
